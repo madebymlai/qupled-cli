@@ -1,0 +1,36 @@
+# Examina CLI Dependencies
+
+# Core library (install from git or local)
+# pip install git+https://github.com/madebymlai/examina.git
+# or: pip install -e /path/to/examina
+
+# CLI Framework
+click>=8.1.0
+rich>=13.0.0
+
+# Vector Store / Embeddings
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
+
+# Database
+sqlalchemy>=2.0.0
+
+# PDF Processing (also in core, but needed locally)
+pypdf>=3.17.0
+pymupdf>=1.23.0
+pdfplumber>=0.10.0
+pdf2image>=1.16.3
+pytesseract>=0.3.10
+Pillow>=10.1.0
+
+# Async
+aiohttp>=3.9.0
+aiofiles>=23.0.0
+
+# Utilities
+python-dateutil>=2.8.2
+pyyaml>=6.0.1
+
+# Development
+pytest>=7.4.3
