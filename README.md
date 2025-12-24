@@ -16,8 +16,11 @@ examina-cli           - Local CLI tool (this repo)
 - **Local Vector Store** - ChromaDB for semantic search
 - **Offline Mode** - Study without internet
 - **Exercise Analysis** - Extract knowledge items from PDFs
-- **Adaptive Learning** - Personalized study paths
-- **Spaced Repetition** - SM2 algorithm for retention
+- **Concept Mapping** - Visualize knowledge dependencies
+- **FSRS Scheduling** - Spaced repetition for retention
+- **Quiz Generation** - Practice with AI-generated questions
+- **Solution Separation** - Split exercises from solutions
+- **Deduplication** - Merge duplicate knowledge items
 
 ## Installation
 
@@ -36,31 +39,73 @@ pip install git+https://github.com/madebymlai/examina.git
 ## Usage
 
 ```bash
-# Import a course PDF
-python cli.py import /path/to/course.pdf --course-code MATH101
+# Initialize database
+python cli.py init
 
-# Start a study session
-python cli.py study MATH101
+# List available courses
+python cli.py courses --degree "Computer Science"
 
-# Take a quiz
-python cli.py quiz MATH101
+# Course info
+python cli.py info --course MATH101
 
-# View learning path
-python cli.py learn MATH101
+# Import and analyze PDFs
+python cli.py ingest --course MATH101 --pdf /path/to/exam.pdf
+python cli.py analyze --course MATH101
 
-# Check mastery
-python cli.py stats MATH101
+# Study commands
+python cli.py learn --course MATH101 --loop "Linear Algebra Basics"
+python cli.py practice --course MATH101 --topic "Derivatives"
+python cli.py quiz --course MATH101 --questions 10
+
+# Visualization
+python cli.py concept-map --course MATH101
+python cli.py concept-graph --course MATH101
+
+# Progress tracking
+python cli.py progress --course MATH101
+python cli.py suggest --course MATH101
+
+# Utilities
+python cli.py search --course MATH101 --tag "integration"
+python cli.py deduplicate --course MATH101 --dry-run
+python cli.py separate-solutions --course MATH101
+python cli.py rate-limits --provider deepseek
 ```
+
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| `init` | Initialize database and load course catalog |
+| `courses` | List courses by degree |
+| `info` | Show course details |
+| `ingest` | Import PDF exercises |
+| `analyze` | Extract knowledge items from exercises |
+| `learn` | Study a core loop |
+| `practice` | Practice specific topics |
+| `quiz` | Take a quiz |
+| `prove` | Prove theorems interactively |
+| `progress` | View learning progress |
+| `suggest` | Get study suggestions |
+| `concept-map` | Generate concept dependency map |
+| `concept-graph` | Visualize knowledge graph |
+| `search` | Search exercises and topics |
+| `deduplicate` | Merge duplicate knowledge items |
+| `separate-solutions` | Split exercises from solutions |
+| `rate-limits` | View/reset LLM rate limits |
 
 ## Structure
 
 ```
 examina-cli/
 ├── cli.py              # Main CLI entry point
-├── vector_store.py     # ChromaDB vector store
-├── storage/            # Database and embeddings
-├── examples/           # Example scripts
-└── scripts/            # Utility scripts
+├── config.py           # Configuration
+├── storage/
+│   ├── database.py     # SQLite database
+│   ├── file_manager.py # PDF storage
+│   └── vector_store.py # ChromaDB embeddings
+├── scripts/            # Utility scripts
+└── requirements.txt    # Dependencies
 ```
 
 ## Dependencies
@@ -71,6 +116,7 @@ Heavy dependencies (why this is separate from core):
 - `faiss-cpu` - Similarity search
 - `click` - CLI framework
 - `rich` - Terminal formatting
+- `pymupdf`, `pdfplumber` - PDF processing
 
 ## Related
 
