@@ -1,5 +1,5 @@
 """
-Vector store for Examina using ChromaDB.
+Vector store for Qupled using ChromaDB.
 Handles embeddings and semantic search for RAG.
 """
 

@@ -1,5 +1,5 @@
 """
-Theory Concept Dependency Graph Builder for Examina.
+Theory Concept Dependency Graph Builder for Qupled.
 Dynamically discovers prerequisite relationships between concepts using LLM.
 Fully generic - works for ANY subject (CS, Math, Physics, Chemistry, etc.).
 """

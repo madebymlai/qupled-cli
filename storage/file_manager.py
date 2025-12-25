@@ -1,5 +1,5 @@
 """
-File management for Examina.
+File management for Qupled.
 Handles ZIP extraction, PDF storage, and image storage.
 """
 
@@ -13,7 +13,7 @@ from config import Config
 
 
 class FileManager:
-    """Manages file operations for Examina."""
+    """Manages file operations for Qupled."""
 
     def __init__(self):
         """Initialize file manager."""

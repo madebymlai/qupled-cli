@@ -1,8 +1,8 @@
-# Examina CLI Dependencies
+# Qupled CLI Dependencies
 
 # Core library (install from git or local)
-# pip install git+https://github.com/madebymlai/examina.git
-# or: pip install -e /path/to/examina
+# pip install git+https://github.com/madebymlai/qupled.git
+# or: pip install -e /path/to/qupled
 
 # CLI Framework
 click>=8.1.0

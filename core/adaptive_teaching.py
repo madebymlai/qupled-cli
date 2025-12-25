@@ -1,5 +1,5 @@
 """
-Adaptive teaching system for Examina.
+Adaptive teaching system for Qupled.
 Personalizes explanations based on student's understanding level and learning progress.
 """
 

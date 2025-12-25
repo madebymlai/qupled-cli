@@ -1,5 +1,5 @@
 """
-Theory Concept Visualization for Examina.
+Theory Concept Visualization for Qupled.
 Renders concept dependency graphs in multiple formats (ASCII, Mermaid, JSON).
 """
 

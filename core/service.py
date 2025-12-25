@@ -1,7 +1,7 @@
 """
-ExaminaService - Service Layer for SaaS Readiness
+QupledService - Service Layer for SaaS Readiness
 
-This module provides a stateless service interface for Examina's core operations.
+This module provides a stateless service interface for Qupled's core operations.
 Designed to enable easy integration with web frameworks (FastAPI/Flask) while
 maintaining all business logic in the core layer.
 
@@ -13,7 +13,7 @@ Architecture Pattern:
 
 Usage for SaaS:
     # In web API endpoint:
-    service = ExaminaService(provider=user_preferences.llm_provider)
+    service = QupledService(provider=user_preferences.llm_provider)
     result = service.ingest_notes(course_code, pdf_path, ...)
 
     # Service handles all business logic without CLI dependencies
@@ -60,9 +60,9 @@ class ServiceResult:
     metadata: Optional[Dict[str, Any]] = None
 
 
-class ExaminaService:
+class QupledService:
     """
-    Stateless service layer for Examina operations.
+    Stateless service layer for Qupled operations.
 
     This class encapsulates all core business logic and provides a clean
     interface for both CLI and future web API integration.
@@ -75,13 +75,13 @@ class ExaminaService:
 
     Example:
         # CLI usage:
-        service = ExaminaService(provider="anthropic")
+        service = QupledService(provider="anthropic")
         result = service.learn_knowledge_item(course_code, loop_id)
 
         # Future web API usage:
         @app.post("/api/courses/{course}/learn")
         def learn(course: str, loop_id: str, user: User):
-            service = ExaminaService(provider=user.preferred_llm)
+            service = QupledService(provider=user.preferred_llm)
             result = service.learn_knowledge_item(course, loop_id)
             return result
     """
@@ -720,13 +720,13 @@ class ExaminaService:
 Example FastAPI integration:
 
 from fastapi import FastAPI, Depends, HTTPException
-from core.service import ExaminaService, ServiceResult
+from core.service import QupledService, ServiceResult
 
 app = FastAPI()
 
-def get_service(user: User = Depends(get_current_user)) -> ExaminaService:
+def get_service(user: User = Depends(get_current_user)) -> QupledService:
     '''Dependency injection for service with user's provider preference.'''
-    return ExaminaService(
+    return QupledService(
         provider=user.preferred_llm_provider,
         language=user.preferred_language
     )
@@ -735,7 +735,7 @@ def get_service(user: User = Depends(get_current_user)) -> ExaminaService:
 async def learn_endpoint(
     course_code: str,
     loop_id: str,
-    service: ExaminaService = Depends(get_service)
+    service: QupledService = Depends(get_service)
 ) -> ServiceResult:
     '''Learn a core loop with AI tutor.'''
     return service.learn_knowledge_item(course_code, loop_id)
@@ -744,11 +744,11 @@ async def learn_endpoint(
 async def practice_endpoint(
     course_code: str,
     topic: Optional[str] = None,
-    service: ExaminaService = Depends(get_service)
+    service: QupledService = Depends(get_service)
 ) -> ServiceResult:
     '''Get practice exercise.'''
     return service.practice_exercise(course_code, topic)
 
 # Authentication, rate limiting, and authorization would be handled
-# at the web layer, keeping business logic clean in ExaminaService
+# at the web layer, keeping business logic clean in QupledService
 """

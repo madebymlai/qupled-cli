@@ -1,5 +1,5 @@
 """
-Progress analytics for Examina.
+Progress analytics for Qupled.
 Tracks student progress, mastery levels, and spaced repetition.
 """
 

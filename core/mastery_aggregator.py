@@ -1,5 +1,5 @@
 """
-Mastery Aggregation Module for Examina.
+Mastery Aggregation Module for Qupled.
 
 Provides hierarchical mastery calculation and cascade updates:
     Exercise → Core Loop → Topic → Course

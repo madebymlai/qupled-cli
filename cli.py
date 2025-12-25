@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Examina - AI-powered exam tutor system.
+Qupled - AI-powered exam tutor system.
 CLI interface for managing courses, ingesting exams, and studying.
 """
 
@@ -58,16 +58,16 @@ def get_effective_provider(provider, profile, task_type_value):
 
 
 @click.group()
-@click.version_option(version="0.1.0", prog_name="Examina")
+@click.version_option(version="0.1.0", prog_name="Qupled")
 def cli():
-    """Examina - AI-powered exam tutor for mastering university courses."""
+    """Qupled - AI-powered exam tutor for mastering university courses."""
     pass
 
 
 @cli.command()
 def init():
-    """Initialize Examina database and load course catalog."""
-    console.print("\n[bold cyan]Initializing Examina...[/bold cyan]\n")
+    """Initialize Qupled database and load course catalog."""
+    console.print("\n[bold cyan]Initializing Qupled...[/bold cyan]\n")
 
     try:
         # Create directories
@@ -104,13 +104,13 @@ def init():
             console.print(f"   ✓ Loaded {courses_added} courses\n")
 
         # Summary
-        console.print("[bold green]✨ Examina initialized successfully![/bold green]\n")
+        console.print("[bold green]✨ Qupled initialized successfully![/bold green]\n")
         console.print(f"Database: {Config.DB_PATH}")
         console.print(f"Data directory: {Config.DATA_DIR}\n")
         console.print("Next steps:")
-        console.print("  • examina courses - View available courses")
-        console.print("  • examina ingest --course <CODE> --zip <FILE> - Import exam PDFs")
-        console.print("  • examina --help - See all commands\n")
+        console.print("  • qupled courses - View available courses")
+        console.print("  • qupled ingest --course <CODE> --zip <FILE> - Import exam PDFs")
+        console.print("  • qupled --help - See all commands\n")
 
     except Exception as e:
         console.print(f"\n[bold red]Error:[/bold red] {e}\n")
@@ -131,7 +131,7 @@ def courses(degree):
             all_courses = db.get_all_courses()
 
         if not all_courses:
-            console.print("\n[yellow]No courses found. Run 'examina init' first.[/yellow]\n")
+            console.print("\n[yellow]No courses found. Run 'qupled init' first.[/yellow]\n")
             return
 
         # Filter by degree if specified
@@ -182,7 +182,7 @@ def info(course):
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             # Get topics and stats
@@ -433,7 +433,7 @@ def search(course, tag, text, multi_only, limit):
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -555,7 +555,7 @@ def search(course, tag, text, multi_only, limit):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def ingest(course, zip_file, material_type, smart_split, provider, profile):
     """Ingest course materials (exams, homework, problem sets, lecture notes) for a course."""
@@ -574,7 +574,7 @@ def ingest(course, zip_file, material_type, smart_split, provider, profile):
 
             if not found_course:
                 console.print(f"[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -807,7 +807,7 @@ def ingest(course, zip_file, material_type, smart_split, provider, profile):
         else:
             console.print()
         console.print(f"\nNext steps:")
-        console.print(f"  • examina info --course {course} - View course status")
+        console.print(f"  • qupled info --course {course} - View course status")
         console.print(f"  • Phase 3: AI analysis to discover topics and core loops\n")
 
     except Exception as e:
@@ -832,7 +832,7 @@ def ingest(course, zip_file, material_type, smart_split, provider, profile):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 @click.option(
     "--lang",
@@ -915,7 +915,7 @@ async def analyze_async(
             # Check for exercises and analyze resume capability
             all_exercises = db.get_exercises_by_course(course_code)
             if not all_exercises:
-                console.print("[yellow]No exercises found. Run 'examina ingest' first.[/yellow]\n")
+                console.print("[yellow]No exercises found. Run 'qupled ingest' first.[/yellow]\n")
                 return
 
             analyzed_exercises = db.get_exercises_by_course(course_code, analyzed_only=True)
@@ -1342,8 +1342,8 @@ async def analyze_async(
             console.print(f"Core loops: {len(knowledge_items)}")
             console.print(f"Exercises: {discovery_result['merged_count']}\n")
             console.print(f"Next steps:")
-            console.print(f"  • examina info --course {course} - View updated course info")
-            console.print(f"  • examina learn --course {course} - Start learning (Phase 4)\n")
+            console.print(f"  • qupled info --course {course} - View updated course info")
+            console.print(f"  • qupled learn --course {course} - Start learning (Phase 4)\n")
 
     except Exception as e:
         console.print(f"\n[bold red]Error:[/bold red] {e}\n")
@@ -1377,7 +1377,7 @@ def analyze_sync(course, limit, provider, profile, lang, force, parallel, batch_
             # Check for exercises and analyze resume capability
             all_exercises = db.get_exercises_by_course(course_code)
             if not all_exercises:
-                console.print("[yellow]No exercises found. Run 'examina ingest' first.[/yellow]\n")
+                console.print("[yellow]No exercises found. Run 'qupled ingest' first.[/yellow]\n")
                 return
 
             analyzed_exercises = db.get_exercises_by_course(course_code, analyzed_only=True)
@@ -1798,8 +1798,8 @@ def analyze_sync(course, limit, provider, profile, lang, force, parallel, batch_
         console.print(f"Core loops: {len(knowledge_items)}")
         console.print(f"Exercises: {discovery_result['merged_count']}\n")
         console.print(f"Next steps:")
-        console.print(f"  • examina info --course {course} - View updated course info")
-        console.print(f"  • examina learn --course {course} - Start learning (Phase 4)\n")
+        console.print(f"  • qupled info --course {course} - View updated course info")
+        console.print(f"  • qupled learn --course {course} - Start learning (Phase 4)\n")
 
     except Exception as e:
         console.print(f"\n[bold red]Error:[/bold red] {e}\n")
@@ -1858,7 +1858,7 @@ def link_materials(course, provider, lang, link_exercises):
             materials = db.get_learning_materials_by_course(course_code)
             if not materials:
                 console.print(
-                    "[yellow]No learning materials found. Run 'examina ingest' first.[/yellow]\n"
+                    "[yellow]No learning materials found. Run 'qupled ingest' first.[/yellow]\n"
                 )
                 return
 
@@ -1875,7 +1875,7 @@ def link_materials(course, provider, lang, link_exercises):
             # Check for topics
             topics = db.get_topics_by_course(course_code)
             if not topics:
-                console.print("[yellow]No topics found. Run 'examina analyze' first.[/yellow]\n")
+                console.print("[yellow]No topics found. Run 'qupled analyze' first.[/yellow]\n")
                 return
 
             console.print(f"Found {len(topics)} topics in course\n")
@@ -1932,10 +1932,10 @@ def link_materials(course, provider, lang, link_exercises):
         # Summary
         console.print("\n[bold green]✨ Material linking complete![/bold green]\n")
         console.print(f"Next steps:")
-        console.print(f"  • examina info --course {course} - View updated course info")
+        console.print(f"  • qupled info --course {course} - View updated course info")
         if not link_exercises:
             console.print(
-                f"  • examina link-materials --course {course} --link-exercises - Link worked examples to exercises"
+                f"  • qupled link-materials --course {course} --link-exercises - Link worked examples to exercises"
             )
         console.print()
 
@@ -2124,7 +2124,7 @@ def split_topics(course, provider, lang, dry_run, force, delete_old):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 @click.option(
     "--force", "-f", is_flag=True, help="Skip prerequisite mastery check and learn anyway"
@@ -2178,7 +2178,7 @@ def learn(course, loop, lang, depth, no_concepts, adaptive, strategy, provider, 
             if not knowledge_item_row:
                 console.print(f"[red]Core loop '{loop}' not found in course {course_code}.[/red]\n")
                 console.print(
-                    "[dim]Use 'examina info --course CODE' to see available core loops.[/dim]\n"
+                    "[dim]Use 'qupled info --course CODE' to see available core loops.[/dim]\n"
                 )
                 return
 
@@ -2285,7 +2285,7 @@ def learn(course, loop, lang, depth, no_concepts, adaptive, strategy, provider, 
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def prove(course, exercise, interactive, technique, lang, provider, profile):
     """Practice mathematical proofs interactively with AI guidance."""
@@ -2454,7 +2454,7 @@ def prove(course, exercise, interactive, technique, lang, provider, profile):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def practice(course, topic, difficulty, lang, provider, profile):
     """Practice exercises interactively with AI feedback."""
@@ -2561,7 +2561,7 @@ def practice(course, topic, difficulty, lang, provider, profile):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def generate(course, loop, difficulty, lang, provider, profile):
     """Generate new practice exercises with AI."""
@@ -2633,7 +2633,7 @@ def generate(course, loop, difficulty, lang, provider, profile):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def prove(course, interactive, lang, provider, profile):
     """Practice proof exercises with specialized proof guidance."""
@@ -2822,7 +2822,7 @@ def prove(course, interactive, lang, provider, profile):
     "--profile",
     type=click.Choice(["free", "pro", "local"]),
     default=None,
-    help="Provider profile for routing (free/pro/local). Uses EXAMINA_PROVIDER_PROFILE if not specified.",
+    help="Provider profile for routing (free/pro/local). Uses QUPLED_PROVIDER_PROFILE if not specified.",
 )
 def quiz(
     course,
@@ -2859,7 +2859,7 @@ def quiz(
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -3156,7 +3156,7 @@ def suggest(course):
 
                 if not found_course:
                     console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                    console.print("Use 'examina courses' to see available courses.\n")
+                    console.print("Use 'qupled courses' to see available courses.\n")
                     return
 
                 course_code = found_course["code"]
@@ -3178,7 +3178,7 @@ def suggest(course):
         for suggestion in suggestions:
             console.print(f"  {suggestion}")
 
-        console.print("\n[dim]Use 'examina quiz --course <CODE>' to start practicing![/dim]\n")
+        console.print("\n[dim]Use 'qupled quiz --course <CODE>' to start practicing![/dim]\n")
 
     except Exception as e:
         console.print(f"\n[bold red]Error:[/bold red] {e}\n")
@@ -3201,7 +3201,7 @@ def progress(course, topics, detailed):
         # Find course
         if not course:
             console.print("\n[yellow]Please specify a course with --course[/yellow]\n")
-            console.print("Use 'examina courses' to see available courses.\n")
+            console.print("Use 'qupled courses' to see available courses.\n")
             return
 
         with Database() as db:
@@ -3214,7 +3214,7 @@ def progress(course, topics, detailed):
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -3278,7 +3278,7 @@ def progress(course, topics, detailed):
                 progress_bar.update(task, completed=int(summary["overall_mastery"] * 100))
         else:
             console.print(
-                "[yellow]No exercises found. Run 'examina ingest' and 'examina analyze' first.[/yellow]"
+                "[yellow]No exercises found. Run 'qupled ingest' and 'qupled analyze' first.[/yellow]"
             )
 
         console.print()
@@ -3390,12 +3390,12 @@ def progress(course, topics, detailed):
 
         # Next steps
         console.print(
-            "[dim]Use 'examina suggest --course {0}' for study recommendations[/dim]".format(
+            "[dim]Use 'qupled suggest --course {0}' for study recommendations[/dim]".format(
                 course_code
             )
         )
         console.print(
-            "[dim]Use 'examina quiz --course {0}' to start practicing[/dim]\n".format(course_code)
+            "[dim]Use 'qupled quiz --course {0}' to start practicing[/dim]\n".format(course_code)
         )
 
     except Exception as e:
@@ -3469,7 +3469,7 @@ def strategy(course, loop, difficulty, lang):
             if not knowledge_item:
                 console.print(f"[red]Core loop '{loop}' not found for course {course}.[/red]\n")
                 console.print(
-                    "Use 'examina info --course {0}' to see available core loops.\n".format(course)
+                    "Use 'qupled info --course {0}' to see available core loops.\n".format(course)
                 )
                 return
 
@@ -3533,7 +3533,7 @@ def path(course, limit, lang):
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -3613,7 +3613,7 @@ def gaps(course, loop, lang):
 
             if not found_course:
                 console.print(f"\n[red]Course '{course}' not found.[/red]\n")
-                console.print("Use 'examina courses' to see available courses.\n")
+                console.print("Use 'qupled courses' to see available courses.\n")
                 return
 
             course_code = found_course["code"]
@@ -3672,7 +3672,7 @@ def gaps(course, loop, lang):
         console.print(f"  Low priority: {len(low_gaps)}\n")
 
         console.print(
-            f"[dim]Use 'examina path --course {course}' to see a personalized study plan[/dim]\n"
+            f"[dim]Use 'qupled path --course {course}' to see a personalized study plan[/dim]\n"
         )
 
     except Exception as e:
@@ -4296,11 +4296,11 @@ def pattern_cache(course, action, force):
     of courses with repetitive exercise patterns.
 
     Examples:
-        examina pattern-cache              # Show cache stats (all courses)
-        examina pattern-cache -c ARCH1     # Show stats for specific course
-        examina pattern-cache --build      # Build cache from analyzed exercises
-        examina pattern-cache --clear      # Clear all cache entries
-        examina pattern-cache --clear -c ARCH1  # Clear cache for specific course
+        qupled pattern-cache              # Show cache stats (all courses)
+        qupled pattern-cache -c ARCH1     # Show stats for specific course
+        qupled pattern-cache --build      # Build cache from analyzed exercises
+        qupled pattern-cache --clear      # Clear all cache entries
+        qupled pattern-cache --clear -c ARCH1  # Clear cache for specific course
     """
     from rich.table import Table
     from core.procedure_cache import ProcedureCache
@@ -4372,7 +4372,7 @@ def pattern_cache(course, action, force):
                     "[dim]  • Use --clear to reset cache (useful after major changes)[/dim]"
                 )
                 console.print(
-                    "[dim]  • Configure thresholds via EXAMINA_PROCEDURE_CACHE_* env vars[/dim]"
+                    "[dim]  • Configure thresholds via QUPLED_PROCEDURE_CACHE_* env vars[/dim]"
                 )
                 console.print()
 
@@ -4449,7 +4449,7 @@ def pattern_cache(course, action, force):
 
                 if total == 0:
                     console.print("[yellow]No analyzed exercises found to cache.[/yellow]\n")
-                    console.print("Run 'examina analyze' first to analyze exercises.\n")
+                    console.print("Run 'qupled analyze' first to analyze exercises.\n")
                     return
 
                 console.print(f"   Found {total} analyzed exercises\n")
@@ -4848,7 +4848,7 @@ def concept_graph(course, format, export, concept, provider):
                 "Theory concepts are extracted from exercises marked as 'theory', 'proof', or 'hybrid'."
             )
             console.print(
-                "\nTip: Run 'examina analyze --course {} --reanalyze' to detect theory exercises.".format(
+                "\nTip: Run 'qupled analyze --course {} --reanalyze' to detect theory exercises.".format(
                     course
                 )
             )

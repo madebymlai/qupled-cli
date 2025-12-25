@@ -1,5 +1,5 @@
 """
-Procedure Pattern Cache for Examina.
+Procedure Pattern Cache for Qupled.
 Caches procedure patterns to avoid redundant LLM calls during analysis.
 
 This module implements Option 3: Procedure Pattern Caching from the performance optimization roadmap.

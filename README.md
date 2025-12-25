@@ -1,14 +1,14 @@
-# Examina CLI
+# Qupled CLI
 
 Local command-line tool for AI-powered exam preparation. Run offline with vector store for semantic search.
 
 ## Architecture
 
 ```
-examina (core)        - Lightweight business logic
+qupled (core)        - Lightweight business logic
     ↓ used by
-examina-cloud         - Web platform (FastAPI + React + PostgreSQL)
-examina-cli           - Local CLI tool (this repo)
+qupled-cloud         - Web platform (FastAPI + React + PostgreSQL)
+qupled-cli           - Local CLI tool (this repo)
 ```
 
 ## Features
@@ -26,14 +26,14 @@ examina-cli           - Local CLI tool (this repo)
 
 ```bash
 # Clone the repo
-git clone https://github.com/madebymlai/examina-cli.git
-cd examina-cli
+git clone https://github.com/madebymlai/qupled-cli.git
+cd qupled-cli
 
 # Install dependencies (includes heavy ML deps)
 pip install -r requirements.txt
 
 # Install core library
-pip install git+https://github.com/madebymlai/examina.git
+pip install git+https://github.com/madebymlai/qupled.git
 ```
 
 ## Usage
@@ -97,7 +97,7 @@ python cli.py rate-limits --provider deepseek
 ## Structure
 
 ```
-examina-cli/
+qupled-cli/
 ├── cli.py              # Main CLI entry point
 ├── config.py           # Configuration
 ├── storage/
@@ -120,8 +120,8 @@ Heavy dependencies (why this is separate from core):
 
 ## Related
 
-- [examina](https://github.com/madebymlai/examina) - Core library
-- [examina-cloud](https://github.com/madebymlai/examina-cloud) - Web platform
+- [qupled](https://github.com/madebymlai/qupled) - Core library
+- [qupled-cloud](https://github.com/madebymlai/qupled-cloud) - Web platform
 
 ## License
 

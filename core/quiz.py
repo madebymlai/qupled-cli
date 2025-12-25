@@ -1,5 +1,5 @@
 """
-Quiz Manager for Examina's Phase 5 quiz system.
+Quiz Manager for Qupled's Phase 5 quiz system.
 Handles quiz creation, question selection, answer evaluation, and SM-2 integration.
 """
 

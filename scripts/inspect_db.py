@@ -4,7 +4,7 @@
 import sqlite3
 from pathlib import Path
 
-db_path = Path(__file__).parent / "data" / "examina.db"
+db_path = Path(__file__).parent / "data" / "qupled.db"
 
 with sqlite3.connect(str(db_path)) as conn:
     conn.row_factory = sqlite3.Row

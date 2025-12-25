@@ -1,8 +1,8 @@
-# Examina CLI TODO
+# Qupled CLI TODO
 
 ## High Priority
 
-- [ ] Fix imports to use examina core as library
+- [ ] Fix imports to use qupled core as library
 - [ ] Test CLI commands after separation
 - [ ] Add proper config file support
 - [ ] Implement offline mode properly

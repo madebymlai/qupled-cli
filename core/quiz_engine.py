@@ -1,5 +1,5 @@
 """
-Quiz engine for Examina.
+Quiz engine for Qupled.
 Manages quiz sessions, question selection, and spaced repetition.
 """
 
