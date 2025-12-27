@@ -1,6 +1,8 @@
 # Qupled CLI
 
-Local command-line tool for AI-powered exam preparation. Run offline with vector store for semantic search.
+[![Website](https://img.shields.io/badge/Try_Qupled-qupled.com-blue)](https://qupled.com)
+
+Local command-line tool for [Qupled](https://qupled.com) - AI-powered study app. Run offline with vector store for semantic search.
 
 ## Architecture
 
@@ -120,8 +122,8 @@ Heavy dependencies (why this is separate from core):
 
 ## Related
 
-- [qupled](https://github.com/madebymlai/qupled) - Core library
-- [qupled-cloud](https://github.com/madebymlai/qupled-cloud) - Web platform
+- **[qupled.com](https://qupled.com)** - Try the web app
+- [qupled-core](https://github.com/madebymlai/qupled-core) - Core library
 
 ## License
 
